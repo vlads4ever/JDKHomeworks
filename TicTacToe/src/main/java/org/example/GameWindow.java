@@ -14,7 +14,7 @@ public class GameWindow extends JFrame {
     JButton btnStart = new JButton("New Game");
     JButton btnExit = new JButton("Exit");
 
-    Map mар;
+    Map map;
     SettingsWindow settings;
 
     GameWindow() {
@@ -24,7 +24,8 @@ public class GameWindow extends JFrame {
         setTitle("TicTacToe");
         setResizable(false);
 
-        Map map = new Map();
+        // Создаем игровую панель
+        map = new Map();
 
         // Создаем второе окно с настройками игры
         settings = new SettingsWindow(this);
@@ -49,8 +50,12 @@ public class GameWindow extends JFrame {
         JPanel panBottom = new JPanel(new GridLayout(1, 2));
         panBottom.add(btnStart);
         panBottom.add(btnExit);
-        add(panBottom, BorderLayout.SOUTH); // Размещаем панель снизу
-        add(map);
+        add(panBottom, BorderLayout.SOUTH); // Размещаем панель кнопок снизу
+        add(map);  // Добавляем в основное окно игровую панель
         setVisible(true);
+    }
+
+    void startNewGame(int mode, int fSzX, int fSzY, int wLen) {
+        map.startNewGame(mode, fSzX, fSzY, wLen);
     }
 }
