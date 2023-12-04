@@ -6,7 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Random;
 
-public class Map extends JFrame {
+public class Map extends JPanel {
     private static final Random RANDOM = new Random();
     private static final int DOT_PADDING = 5;
 
@@ -49,7 +49,7 @@ public class Map extends JFrame {
         // по полю на, котором закончилась игра
         if (isGameOver || !isInitialized) return;
 
-        // Расчитываем ячейку по координатам клика
+        // Расчитываем ячейку по координатам клика пользователя
         int cellX = e.getX() / cellWidth;
         int cellY = e.getY() / cellHeight;
         if (!isValidCell(cellX, cellY) || !isEmptyCell(cellX, cellY)) return;
@@ -91,8 +91,8 @@ public class Map extends JFrame {
     }
 
     @Override
-    public void paintComponents(Graphics g) {  // У преподаватель здесь был другой метод: protected void paintComponent(Graphics g)
-        super.paintComponents(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         render(g);
     }
 
@@ -177,7 +177,7 @@ public class Map extends JFrame {
     }
 
     private boolean isValidCell(int x, int y) {
-        return x > 0 && x < fieldSizeX && y >= 0 && y < fieldSizeY;
+        return x >= 0 && x < fieldSizeX && y >= 0 && y < fieldSizeY;
     }
 
     private boolean isEmptyCell(int x, int y) {
