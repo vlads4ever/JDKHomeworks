@@ -17,7 +17,7 @@ public class SettingsWindow extends JFrame {
         btnStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameWindow.startNewGame(0, 3, 3, 3);
+                gameWindow.startNewGame(0, 4, 4, 4);
                 setVisible(false);
             }
         });
