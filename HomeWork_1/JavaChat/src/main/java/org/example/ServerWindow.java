@@ -52,7 +52,7 @@ public class ServerWindow extends JFrame {
 
     public void postMessage(String message) {
         if (isServerWorking) {
-            log.append(message);
+            log.append(message + "\n");
             System.out.println("Message on server: " + message);
         } else System.out.println("Server is not started");
     }

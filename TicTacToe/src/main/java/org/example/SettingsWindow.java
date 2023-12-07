@@ -10,7 +10,8 @@ public class SettingsWindow extends JFrame {
 
     JButton btnStart = new JButton("Start new game");
     SettingsWindow(GameWindow gameWindow) {
-        setLocationRelativeTo(gameWindow);  // Расположить окно настроек относительно основного окна по центру
+        // Расположить окно настроек относительно основного окна (левый верхний угол по центру)
+        setLocationRelativeTo(gameWindow);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
         // При нажатии на кнопку Старт запускается окно игры с игровыми параметрами

@@ -18,8 +18,6 @@ public class ChatWindow extends JFrame {
     private JPasswordField tfPassword;
     private JButton btnLogin, btnSend;
 
-
-
     ChatWindow(ServerWindow serverWindow) {
         this.serverWindow = serverWindow;
 

@@ -197,41 +197,40 @@ public class Map extends JPanel {
                 if (checkHorizontalWin(x, y, HUMAN_DOT, checkFieldsCount)) {
                     if (isValidCell(x - 1, y) && isEmptyCell(x - 1, y)) {
                         field[y][x - 1] = AI_DOT;
-                        break;
+                        return;
                     } else if (isValidCell(x + checkFieldsCount, y) && isEmptyCell(x + checkFieldsCount, y)) {
                         field[y][x + checkFieldsCount] = AI_DOT;
-                        break;
+                        return;
                     }
                 } else if (checkVerticalWin(x, y, HUMAN_DOT, checkFieldsCount)) {
                     if (isValidCell(x, y - 1) && isEmptyCell(x, y - 1)) {
                         field[y - 1][x] = AI_DOT;
-                        break;
+                        return;
                     } else if (isValidCell(x, y + checkFieldsCount) && isEmptyCell(x, y + checkFieldsCount)) {
                         field[y + checkFieldsCount][x] = AI_DOT;
-                        break;
+                        return;
                     }
                 } else if (checkUpDiagonalWin(x, y, HUMAN_DOT, checkFieldsCount)) {
                     if (isValidCell(x - 1, y + 1) && isEmptyCell(x - 1, y + 1)) {
                         field[y + 1][x - 1] = AI_DOT;
-                        break;
+                        return;
                     } else if (isValidCell(x + checkFieldsCount, y - checkFieldsCount) &&
                             isEmptyCell(x + checkFieldsCount, y - checkFieldsCount)) {
                         field[y - checkFieldsCount][x + checkFieldsCount] = AI_DOT;
-                        break;
+                        return;
                     }
                 } else if (checkDownDiagonalWin(x, y, HUMAN_DOT, checkFieldsCount)) {
                     if (isValidCell(x - 1, y - 1) && isEmptyCell(x - 1, y - 1)) {
                         field[y - 1][x - 1] = AI_DOT;
-                        break;
+                        return;
                     } else if (isValidCell(x + checkFieldsCount, y + checkFieldsCount) &&
                             isEmptyCell(x + checkFieldsCount, y + checkFieldsCount)) {
                         field[y + checkFieldsCount][x + checkFieldsCount] = AI_DOT;
-                        break;
+                        return;
                     }
                 }
             }
         }
-
         // Если играть на опережение не получается, то компьютер ходит случайно
         randomAiTurn();
     }
