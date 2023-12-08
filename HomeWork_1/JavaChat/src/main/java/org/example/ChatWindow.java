@@ -9,7 +9,10 @@ public class ChatWindow extends JFrame {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 500;
 
-    ServerWindow serverWindow;
+    private ServerWindow serverWindow;
+    private ChatWindow thisChatWindow;
+    private boolean isConnectedToServer;
+
 
     private final JTextArea log;
     private JScrollPane scrollLog;
@@ -18,13 +21,15 @@ public class ChatWindow extends JFrame {
     private JPasswordField tfPassword;
     private JButton btnLogin, btnSend;
 
-    ChatWindow(ServerWindow serverWindow) {
+    ChatWindow(ServerWindow serverWindow, int x, int y) {
         this.serverWindow = serverWindow;
+        thisChatWindow = this;
+        isConnectedToServer = false;
 
         panelTop = new JPanel(new GridLayout(2,3));
         tfIPAddress = new JTextField("127.0.0.1");
         tfPort = new JTextField("8189");
-        tfLogin = new JTextField("Ivan_Fedorovich");
+        tfLogin = new JTextField("Ivan");
         tfPassword = new JPasswordField("12345678");
         btnLogin = new JButton("Login");
 
@@ -36,7 +41,7 @@ public class ChatWindow extends JFrame {
         scrollLog = new JScrollPane(log);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setLocation(x, y);
         setSize(WIDTH, HEIGHT);
         setTitle("Chat client");
 
@@ -48,7 +53,19 @@ public class ChatWindow extends JFrame {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Log in to server");
+                if (!isConnectedToServer) {
+                    if (serverWindow.connectUser(thisChatWindow)) {
+                        isConnectedToServer = true;
+                        System.out.println("You have connect to server.");
+                    } else {
+                        log.append("Server does not answer.\n");
+                        System.out.println("Server does not answer.");
+                    }
+                } else {
+                    log.append("You already have connect to server.\n");
+                    System.out.println("You already have connect to server.");
+                }
+
             }
         });
         add(panelTop, BorderLayout.NORTH);
@@ -57,18 +74,33 @@ public class ChatWindow extends JFrame {
         tfMessage.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Message on client: " + tfMessage.getText());
-                serverWindow.postMessage(tfMessage.getText());
-                tfMessage.setText("");
+                if (isConnectedToServer) {
+                    if (serverWindow.postMessage(tfLogin.getText() + ": " + tfMessage.getText())) {
+                        tfMessage.setText("");
+                        System.out.println("Message on client: " + tfLogin.getText() + ": " + tfMessage.getText());
+                    } else {
+                        log.append("Server does not answer.\n");
+                        System.out.println("Server does not answer.");
+                    }
+
+                } else {
+                    log.append("No connect to server.\n");
+                    System.out.println("No connect to server.");
+                }
             }
         });
         panelBottom.add(btnSend, BorderLayout.EAST);
         btnSend.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Message on client: " + tfMessage.getText());
-                serverWindow.postMessage(tfMessage.getText());
-                tfMessage.setText("");
+                if (isConnectedToServer) {
+                    serverWindow.postMessage(tfLogin.getText() + ": " + tfMessage.getText());
+                    tfMessage.setText("");
+                    System.out.println("Message on client: " + tfLogin.getText() + ": " + tfMessage.getText());
+                } else {
+                    log.append("No connect to server.\n");
+                    System.out.println("No connect to server.");
+                }
             }
         });
 
@@ -78,7 +110,13 @@ public class ChatWindow extends JFrame {
         add(scrollLog);
 
         setVisible(true);
-
     }
 
+    public void writeLog(String message) {
+        log.append(message + "\n");
+    }
+
+    public String getLogin() {
+        return tfLogin.getText();
+    }
 }

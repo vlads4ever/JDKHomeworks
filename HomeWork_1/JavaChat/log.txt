@@ -1,0 +1,27 @@
+
+Server is started.
+User Ivan is connected.
+Ivan: Привет!
+Ivan: Как дела?
+Ivan: У меня все хорошо!
+Server is stopped.
+Server is started.
+User Ivan is connected.
+User Petr is connected.
+Ivan: Ого!
+Petr: Да-да!
+Server is stopped.
+Server is started.
+User Ivan is connected.
+Ivan: asdvfadf
+Ivan: asdfgasdf
+Ivan: sadfgafd
+User Vasya is connected.
+Ivan: fgbf
+Ivan: hjfmjhf
+Ivan: asDasd
+Ivan: hthjk,m
+Vasya: sdafadsf
+Vasya: gfdgf
+Vasya: dsafgadsf
+Server is stopped.
