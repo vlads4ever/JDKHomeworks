@@ -18,6 +18,7 @@ public class ServerWindow extends JFrame {
     private JTextArea log;
     private JPanel panBottom;
     private JScrollPane scrollLog;
+    private StringBuilder chat;
     private boolean isServerWorking;
 
     private List<ChatWindow> connectedUsers;
@@ -30,6 +31,7 @@ public class ServerWindow extends JFrame {
         log = new JTextArea();
         scrollLog = new JScrollPane(log);
         panBottom = new JPanel(new GridLayout(1, 2));
+        chat = new StringBuilder();
         isServerWorking = false;
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -75,6 +77,7 @@ public class ServerWindow extends JFrame {
     public boolean postMessage(String message) {
         if (isServerWorking) {
             log.append(message + "\n");
+            chat.append(message + "\n");
             for (ChatWindow chatWindow: connectedUsers) {
                 chatWindow.writeLog(message);
             }
@@ -91,7 +94,7 @@ public class ServerWindow extends JFrame {
         if (isServerWorking) {
             connectedUsers.add(chatWindow);
             log.append("User " + chatWindow.getLogin() + " is connected.\n");
-            chatWindow.writeLog(log.getText());
+            chatWindow.writeLog(chat.toString());
             chatWindow.writeLog("Connected to server");
             System.out.println("User " + chatWindow.getLogin() + " is connected.\n");
             return true;
@@ -105,7 +108,7 @@ public class ServerWindow extends JFrame {
     private boolean saveLog() {
         try (FileWriter writer = new FileWriter("log.txt", false))
         {
-            for (String line: log.getText().split("\\n")) {
+            for (String line: chat.toString().split("\\n")) {
                 writer.write(line + "\n");
             }
 
@@ -125,6 +128,7 @@ public class ServerWindow extends JFrame {
                 stringBuilder.append((char)c);
             }
 
+            chat.append(stringBuilder.toString());
             log.append(stringBuilder.toString());
         } catch (IOException e) {
             System.out.println(e.getMessage());

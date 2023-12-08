@@ -14,7 +14,7 @@ public class ChatWindow extends JFrame {
     private boolean isConnectedToServer;
 
 
-    private final JTextArea log;
+    private JTextArea log;
     private JScrollPane scrollLog;
     private JPanel panelTop, panelBottom;
     private JTextField tfIPAddress, tfPort, tfLogin, tfMessage;
