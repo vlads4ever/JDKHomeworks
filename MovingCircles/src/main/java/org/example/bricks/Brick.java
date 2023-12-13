@@ -1,15 +1,18 @@
-package org.example;
+package org.example.bricks;
+
+import org.example.common.MainCanvas;
+import org.example.common.Sprite;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Ball extends Sprite {
+public class Brick extends Sprite {
     private static Random rnd = new Random();
     private final Color color;
     private float vX; // Скорость по оси X
     private float vY; // Скорость по оси Y
 
-    Ball() {
+    Brick() {
         halfHeight = 20 + (float) (Math.random() * 50f);
         halfWidth = halfHeight;
         color = new Color(rnd.nextInt( ));
@@ -18,7 +21,7 @@ public class Ball extends Sprite {
     }
 
     @Override
-    void update(MainCanvas canvas, float deltaTime) {
+    public void update(MainCanvas canvas, float deltaTime) {
         x += vX * deltaTime;
         y += vY * deltaTime;
 
@@ -42,9 +45,9 @@ public class Ball extends Sprite {
     }
 
     @Override
-    void render(MainCanvas canvas, Graphics g) {
+    public void render(MainCanvas canvas, Graphics g) {
         g.setColor(color);
-        g.fillOval((int) getLeft(), (int) getTop(), (int) getWidth(), (int) getHeight());
+        g.fillRect((int) getLeft(), (int) getTop(), (int) getWidth(), (int) getHeight());
     }
 
 }

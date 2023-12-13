@@ -1,20 +1,25 @@
-package org.example;
+package org.example.circles;
+
+import org.example.common.CanvasRepaintListener;
+import org.example.common.Interactable;
+import org.example.common.MainCanvas;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainWindow extends JFrame {
+public class MainWindow extends JFrame implements CanvasRepaintListener {
     private static final int POS_X = 400;
     private static final int POS_Y = 200;
     private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 600;
-    private final Sprite[] sprites = new Sprite[10];
+    private final Interactable[] sprites = new Interactable[10];
 
     MainWindow() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE) ;
         setBounds (POS_X, POS_Y, WINDOW_WIDTH, WINDOW_HEIGHT);
         setTitle("Circles");
-        for (int i = 0; i < sprites.length; i++) {
+        sprites[0] = new Background();
+        for (int i = 1; i < sprites.length; i++) {
             sprites[i] = new Ball();
         }
         MainCanvas canvas = new MainCanvas(this);
@@ -22,6 +27,7 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
 
+    @Override
     public void onDrawFrame(MainCanvas canvas, Graphics g, float deltaTime) {
         update(canvas, deltaTime);
         render(canvas, g);
@@ -37,5 +43,9 @@ public class MainWindow extends JFrame {
         for (int i = 0; i < sprites.length; i++) {
             sprites[i].render(canvas, g);
         }
+    }
+
+    public static void main(String[] args) {
+        new MainWindow();
     }
 }
