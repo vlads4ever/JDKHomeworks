@@ -1,10 +1,9 @@
 package org.example.animals;
 
-public class Dog implements Animal {
-    private String name;
+public class Dog extends Animal {
 
     public Dog(String name) {
-        this.name = name;
+        super.name = name;
     }
 
     public String getName() {

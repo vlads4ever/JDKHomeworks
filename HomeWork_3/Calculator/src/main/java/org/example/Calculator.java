@@ -16,21 +16,48 @@ public class Calculator {
         } else {
             return (T3) Integer.valueOf(a.intValue() + b.intValue());
         }
-
-
-//        if (a instanceof Double || b instanceof Double) {
-//            return (T1) Double.valueOf(a.doubleValue() + b.doubleValue());
-//        } else if (a instanceof Float || b instanceof Float) {
-//            return (T1) Float.valueOf(a.floatValue() + b.floatValue());
-//        } else if (a instanceof Long || b instanceof Long) {
-//            return (T1) Long.valueOf(a.longValue() + b.longValue());
-//        } else {
-//            return (T1) Integer.valueOf(a.intValue() + b.intValue());
-//        }
     }
-//    public static <T1 extends Number, T2 extends Number, T3 extends Number> T3 multiply(T1 num1, T2 num2) {}
-//    public static <T1 extends Number, T2 extends Number, T3 extends Number> T3 divide(T1 num1, T2 num2) {}
-//    public static <T1 extends Number, T2 extends Number, T3 extends Number> T3 subtract(T1 num1, T2 num2) {}
+    public static <T1 extends Number, T2 extends Number, T3 extends Number> T3 multiply(T1 a, T2 b) {
+        if (a instanceof Double || b instanceof Double) {
+            return (T3) Double.valueOf(a.doubleValue() * b.doubleValue());
+        } else if (a instanceof Float || b instanceof Float) {
+            return (T3) Float.valueOf(a.floatValue() * b.floatValue());
+        } else if (a instanceof Long || b instanceof Long) {
+            return (T3) Long.valueOf(a.longValue() * b.longValue());
+        } else {
+            return (T3) Integer.valueOf(a.intValue() * b.intValue());
+        }
+    }
+    public static <T1 extends Number, T2 extends Number, T3 extends Number> T3 divide(T1 a, T2 b) {
+        if (a instanceof Double || b instanceof Double) {
+            return (T3) Double.valueOf(a.doubleValue() / b.doubleValue());
+        } else if (a instanceof Float || b instanceof Float) {
+            return (T3) Float.valueOf(a.floatValue() / b.floatValue());
+        } else if (a instanceof Long || b instanceof Long) {
+            if (a.longValue() / b.longValue() != 0) {
+                return (T3) Double.valueOf(a.doubleValue() / b.doubleValue());
+            } else {
+                return (T3) Long.valueOf(a.longValue() / b.longValue());
+            }
+        } else {
+            if (a.intValue() / b.intValue() != 0) {
+                return (T3) Double.valueOf(a.doubleValue() / b.doubleValue());
+            } else {
+                return (T3) Integer.valueOf(a.intValue() / b.intValue());
+            }
+        }
+    }
+    public static <T1 extends Number, T2 extends Number, T3 extends Number> T3 subtract(T1 a, T2 b) {
+        if (a instanceof Double || b instanceof Double) {
+            return (T3) Double.valueOf(a.doubleValue() - b.doubleValue());
+        } else if (a instanceof Float || b instanceof Float) {
+            return (T3) Float.valueOf(a.floatValue() - b.floatValue());
+        } else if (a instanceof Long || b instanceof Long) {
+            return (T3) Long.valueOf(a.longValue() - b.longValue());
+        } else {
+            return (T3) Integer.valueOf(a.intValue() - b.intValue());
+        }
+    }
 
 
 }

@@ -1,5 +1,11 @@
 package org.example.animals;
 
-public interface Animal {
-    void getVoice();
+public abstract class Animal implements Comparable<Animal> {
+    public String name;
+    public abstract void getVoice();
+
+    @Override
+    public int compareTo(Animal o) {
+        return name.compareTo(((Animal) o).name);
+    }
 }
