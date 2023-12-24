@@ -79,7 +79,7 @@ public class Main {
      * и false в противном случае. Массивы могут быть любого типа данных, но должны иметь одинаковую длину и содержать
      * элементы одного типа по парно.
      */
-    public static <T1 extends Animal, T2 extends Animal> boolean compareArrays(T1[] array1, T2[] array2) {
+    public static <T1 extends Comparable, T2 extends Comparable> boolean compareArrays(T1[] array1, T2[] array2) {
         if (array1.length != array2.length)
             return false;
         for (int i = 0; i < array1.length; i++) {

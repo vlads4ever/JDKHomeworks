@@ -34,13 +34,13 @@ public class Calculator {
         } else if (a instanceof Float || b instanceof Float) {
             return (T3) Float.valueOf(a.floatValue() / b.floatValue());
         } else if (a instanceof Long || b instanceof Long) {
-            if (a.longValue() / b.longValue() != 0) {
+            if (a.longValue() % b.longValue() != 0) {
                 return (T3) Double.valueOf(a.doubleValue() / b.doubleValue());
             } else {
                 return (T3) Long.valueOf(a.longValue() / b.longValue());
             }
         } else {
-            if (a.intValue() / b.intValue() != 0) {
+            if (a.intValue() % b.intValue() != 0) {
                 return (T3) Double.valueOf(a.doubleValue() / b.doubleValue());
             } else {
                 return (T3) Integer.valueOf(a.intValue() / b.intValue());
