@@ -29,7 +29,9 @@ public class Calculator {
         }
     }
     public static <T1 extends Number, T2 extends Number, T3 extends Number> T3 divide(T1 a, T2 b) {
-        if (a instanceof Double || b instanceof Double) {
+        if (b.equals(0)) {
+            return null;
+        } else if (a instanceof Double || b instanceof Double) {
             return (T3) Double.valueOf(a.doubleValue() / b.doubleValue());
         } else if (a instanceof Float || b instanceof Float) {
             return (T3) Float.valueOf(a.floatValue() / b.floatValue());

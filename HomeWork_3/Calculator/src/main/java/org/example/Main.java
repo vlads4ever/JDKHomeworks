@@ -33,6 +33,7 @@ public class Main {
                 "Частное " + aInt + " / " + bDbl + " = " + Calculator.divide(aInt, bDbl) + "\n" +
                 "Частное " + aFlt + " / " + bInt + " = " + Calculator.divide(aFlt, bInt) + "\n" +
                 "Частное " + aInt + " / " + bLng + " = " + Calculator.divide(aInt, bLng) + "\n" +
+                "Частное " + aInt + " / " + 0 + " = " + Calculator.divide(aInt, 0) + "\n" +
                 "Разность " + aInt + " - " + bInt + " = " + Calculator.subtract(aInt, bInt) + "\n" +
                 "Разность " + aInt + " - " + bDbl + " = " + Calculator.subtract(aInt, bDbl) + "\n" +
                 "Разность " + aFlt + " - " + bInt + " = " + Calculator.subtract(aFlt, bInt) + "\n" +
