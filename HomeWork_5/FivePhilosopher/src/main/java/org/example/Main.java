@@ -16,7 +16,6 @@ public class Main {
     private static final int philosophersNumber = 5;
     private static final int dinerNumber = philosophersNumber / 2;
     private static final Semaphore semaphore = new Semaphore(dinerNumber);
-    private static Philosopher[] philosophers = new Philosopher[philosophersNumber];
     private static Fork[] forks = new Fork[philosophersNumber];
 
     public static void main(String[] args) {
@@ -27,12 +26,7 @@ public class Main {
         for (int i = 0; i < philosophersNumber; i++) {
             Fork leftFork = forks[i];
             Fork rightFork = (i < philosophersNumber - 1) ? forks[i + 1] : forks[0];
-            philosophers[i] = new Philosopher("Философ №" + (i + 1), leftFork, rightFork, semaphore);
-            philosophers[i].start();
+            new Philosopher("Философ №" + (i + 1), leftFork, rightFork, semaphore).start();
         }
-
-
     }
-
-
 }

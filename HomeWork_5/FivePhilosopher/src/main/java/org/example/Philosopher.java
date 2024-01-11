@@ -30,13 +30,14 @@ public class Philosopher extends Thread {
                     System.out.println(name + " взял левую " + leftFork.getName());
                     synchronized (rightFork) {
                         System.out.println(name + " взял правую " + rightFork.getName());
-                        System.out.println(name + " кушает.");
+                        System.out.println(name + " кушает " + (countOfMeals + 1) + "й раз");
                         Thread.sleep(1000);
                         System.out.println(name + " положил правую " + rightFork.getName());
                     }
 
                     System.out.println(name + " положил левую " + leftFork.getName());
                 }
+                semaphore.release(); // Освобождаем очередь на обед
                 countOfMeals++;
             }
             System.out.println(name + " закончил поток.");
