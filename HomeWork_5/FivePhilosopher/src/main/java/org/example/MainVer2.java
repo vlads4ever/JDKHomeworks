@@ -1,8 +1,7 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Semaphore;
+import org.example.ver2.Fork2;
+import org.example.ver2.Philosopher2;
 
 /**
  * Пять безмолвных философов сидят вокруг круглого стола, перед каждым философом стоит тарелка спагетти.
@@ -12,21 +11,20 @@ import java.util.concurrent.Semaphore;
  * Философ не может есть два раза подряд, не прервавшись на размышления (можно не учитывать)
  * Описать в виде кода такую ситуацию. Каждый философ должен поесть три раза
  */
-public class Main {
+public class MainVer2 {
+    // Второй вариант решения с помощью волатильной переменной признака занятости вилки
     private static final int philosophersNumber = 5;
-    private static final int dinerNumber = philosophersNumber / 2;
-    private static final Semaphore semaphore = new Semaphore(dinerNumber);
-    private static Fork[] forks = new Fork[philosophersNumber];
+    private static Fork2[] forks = new Fork2[philosophersNumber];
 
     public static void main(String[] args) {
         for (int i = 0; i < philosophersNumber; i++) {
-            forks[i] = new Fork("Вилка №" + (i + 1));
+            forks[i] = new Fork2("Вилка №" + (i + 1));
         }
 
         for (int i = 0; i < philosophersNumber; i++) {
-            Fork leftFork = forks[i];
-            Fork rightFork = (i < philosophersNumber - 1) ? forks[i + 1] : forks[0];
-            new Philosopher("Философ №" + (i + 1), leftFork, rightFork, semaphore).start();
+            Fork2 leftFork = forks[i];
+            Fork2 rightFork = (i < philosophersNumber - 1) ? forks[i + 1] : forks[0];
+            new Philosopher2("Философ №" + (i + 1), leftFork, rightFork).start();
         }
     }
 }

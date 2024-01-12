@@ -1,10 +1,10 @@
-package org.example;
+package org.example.ver2;
 
-public class Fork {
+public class Fork2 {
     private volatile boolean taken;
     private final String name;
 
-    public Fork(String name) {
+    public Fork2(String name) {
         this.taken = false;
         this.name = name;
     }
