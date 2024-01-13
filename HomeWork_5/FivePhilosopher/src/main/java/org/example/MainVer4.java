@@ -13,7 +13,8 @@ import org.example.ver4.Philosopher4;
  */
 public class MainVer4 {
     // Четвертый вариант решения с помощью атомарного признака занятости вилки
-    private static final int philosophersNumber = 2;
+    // Четвертый вариант хорош
+    private static final int philosophersNumber = 5;
     private static Fork4[] forks = new Fork4[philosophersNumber];
 
     public static void main(String[] args) {

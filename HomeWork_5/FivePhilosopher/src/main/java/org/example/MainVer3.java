@@ -15,6 +15,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class MainVer3 {
     // Третий вариант решения с помощью синхронизированной коллекции для определения занятости вилки
+    // НО: В третьем варианте вроде бы еще меньше защиты использовано, чем во втором варианте и возможна такая же ситуация.
     private static final int philosophersNumber = 5;
     private static CopyOnWriteArrayList<Fork3> forks = new CopyOnWriteArrayList<>();
 

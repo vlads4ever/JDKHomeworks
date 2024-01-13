@@ -15,6 +15,8 @@ import java.util.concurrent.Semaphore;
  */
 public class MainVer1 {
     // Первый вариант решения с помощью семафора, допускающего ограниченное число обедающих одновременно
+    // НО: В первом варианте плохо то, что симафором могут завладеть два соседа, но кушать они будут по очереди,
+    // в то время как другие могли бы есть одновременно.
     private static final int philosophersNumber = 5;
     private static final int dinerNumber = philosophersNumber / 2;
     private static final Semaphore semaphore = new Semaphore(dinerNumber);
