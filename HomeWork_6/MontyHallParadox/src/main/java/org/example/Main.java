@@ -36,7 +36,7 @@ public class Main {
                 winsNotChange, defeatsNotChange, winsNotChangePercent);
     }
 
-    private static boolean[] getArray(Random random) {
+    private static boolean[] getArray() {
         boolean[] array = new boolean[3];
         int randomIndex = random.nextInt(0,3);
         array[randomIndex] = true;
@@ -66,7 +66,7 @@ public class Main {
     private static Map<Integer, Boolean> gamesWithChange() {
         Map<Integer, Boolean> resultsChange = new HashMap<>();
         for (int i = 0; i < NUMBER_OF_GAMES; i++) {
-            boolean[] array = getArray(random);
+            boolean[] array = getArray();
             int firstChoice = random.nextInt(0,3);
             int openDoor = openTheDoor(firstChoice, array);
             int secondChoice = getSecondChoice(firstChoice, openDoor);
@@ -82,7 +82,7 @@ public class Main {
     private static Map<Integer, Boolean> gamesWithoutChange() {
         Map<Integer, Boolean> resultsNotChange = new HashMap<>();
         for (int i = 0; i < NUMBER_OF_GAMES; i++) {
-            boolean[] array = getArray(random);
+            boolean[] array = getArray();
             int firstChoice = random.nextInt(0,3);
             resultsNotChange.put(i, array[firstChoice]);
         }
