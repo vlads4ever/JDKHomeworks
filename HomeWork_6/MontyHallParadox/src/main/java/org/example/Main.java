@@ -13,7 +13,6 @@ import java.util.Random;
  * Сохранить результат в HashMap<шаг теста, результат>
  * Вывести на экран статистику по победам и поражениям
  */
-
 public class Main {
     private static final Random random = new Random();
     private static final int NUMBER_OF_GAMES = 1000;
@@ -36,6 +35,10 @@ public class Main {
                 winsNotChange, defeatsNotChange, winsNotChangePercent);
     }
 
+    /**
+     * Подготовить игровой сет
+     * @return Игровой сет
+     */
     private static boolean[] getArray() {
         boolean[] array = new boolean[3];
         int randomIndex = random.nextInt(0,3);
@@ -43,6 +46,12 @@ public class Main {
         return array;
     }
 
+    /**
+     * Открыть для подсказки дверь, отличную от выбора игрока и не выигрышную
+     * @param firstChoice Выбор игрока
+     * @param array Игровой сет
+     * @return
+     */
     private static int openTheDoor(int firstChoice, boolean[] array) {
         int openDoor = 0;
         for (int i = 0; i < 3; i++) {
@@ -51,6 +60,12 @@ public class Main {
         return openDoor;
     }
 
+    /**
+     * Второй ход игрока, отличный от первого и не открытая дверь
+     * @param firstChoice Первый ход игрока
+     * @param openDoor Открытая дверь
+     * @return
+     */
     private static int getSecondChoice(int firstChoice, int openDoor) {
         int secondChoice = 0;
         for (int i = 0; i < 3; i++) {
