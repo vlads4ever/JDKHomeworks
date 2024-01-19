@@ -16,60 +16,61 @@ import java.util.Random;
 
 public class Main {
     private static final Random random = new Random();
+    private static final int NUMBER_OF_GAMES = 1000;
 
     public static void main(String[] args) {
         Map<Integer, Boolean> resultsChange = gamesWithChange();
         int winsChange = (int) resultsChange.values().stream().filter(b -> b).count();
         int defeatsChange = resultsChange.size() - winsChange;
-        double winsChangePercent = (double) winsChange / 1000;
+        double winsChangePercent = (double) winsChange / NUMBER_OF_GAMES * 100;
         System.out.println("Статистика побед игрока при изменении первоначального выбора:");
-        System.out.printf("Побед: %d, Поражений: %d\n", winsChange, defeatsChange);
-        System.out.printf("Процент побед: %.3f\n", winsChangePercent);
+        System.out.printf("Побед: %d Поражений: %d Процент побед: %.1f%%\n",
+                winsChange, defeatsChange, winsChangePercent);
 
         Map<Integer, Boolean> resultsNotChange = gamesWithoutChange();
         int winsNotChange = (int) resultsNotChange.values().stream().filter(b -> b).count();
         int defeatsNotChange = resultsNotChange.size() - winsNotChange;
-        double winsNotChangePercent = (double) winsNotChange / 1000;
-        System.out.println("Статистика побед игрока при изменении первоначального выбора:");
-        System.out.printf("Побед: %d, Поражений: %d\n", winsNotChange, defeatsNotChange);
-        System.out.printf("Процент побед: %.3f\n", winsNotChangePercent);
+        double winsNotChangePercent = (double) winsNotChange / NUMBER_OF_GAMES * 100;
+        System.out.println("Статистика побед игрока при неизменности первоначального выбора:");
+        System.out.printf("Побед: %d Поражений: %d Процент побед: %.1f%%\n",
+                winsNotChange, defeatsNotChange, winsNotChangePercent);
     }
 
-    public static boolean[] getArray(Random random) {
+    private static boolean[] getArray(Random random) {
         boolean[] array = new boolean[3];
         int randomIndex = random.nextInt(0,3);
         array[randomIndex] = true;
         return array;
     }
 
-    public static int getSecondChoice(int firstChoice, Random random) {
-        while (true) {
-            int secondChoice = random.nextInt(0, 3);
-            if (secondChoice != firstChoice) {
-                return secondChoice;
-            }
+    private static int openTheDoor(int firstChoice, boolean[] array) {
+        int openDoor = 0;
+        for (int i = 0; i < 3; i++) {
+            if (i != firstChoice && !array[i]) openDoor = i;
         }
+        return openDoor;
+    }
+
+    private static int getSecondChoice(int firstChoice, int openDoor) {
+        int secondChoice = 0;
+        for (int i = 0; i < 3; i++) {
+            if (i != firstChoice && i != openDoor) secondChoice = i;
+        }
+        return secondChoice;
     }
 
     /**
      * Эмуляция 1000 циклов игры, где игрок меняет первоначальный выбор
      * @return Map<Integer, Boolean> resultsChange
      */
-    public static Map<Integer, Boolean> gamesWithChange() {
+    private static Map<Integer, Boolean> gamesWithChange() {
         Map<Integer, Boolean> resultsChange = new HashMap<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < NUMBER_OF_GAMES; i++) {
             boolean[] array = getArray(random);
             int firstChoice = random.nextInt(0,3);
-            if (array[firstChoice]) {
-                resultsChange.put(i, true);
-            } else {
-                int secondChoice = getSecondChoice(firstChoice, random);
-                if (array[secondChoice]) {
-                    resultsChange.put(i, true);
-                } else {
-                    resultsChange.put(i, false);
-                }
-            }
+            int openDoor = openTheDoor(firstChoice, array);
+            int secondChoice = getSecondChoice(firstChoice, openDoor);
+            resultsChange.put(i, array[secondChoice]);
         }
         return resultsChange;
     }
@@ -78,16 +79,12 @@ public class Main {
      * Эмуляция 1000 циклов игры, где игрок НЕ меняет первоначальный выбор
      * @return Map<Integer, Boolean> resultsNotChange
      */
-    public static Map<Integer, Boolean> gamesWithoutChange() {
+    private static Map<Integer, Boolean> gamesWithoutChange() {
         Map<Integer, Boolean> resultsNotChange = new HashMap<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < NUMBER_OF_GAMES; i++) {
             boolean[] array = getArray(random);
             int firstChoice = random.nextInt(0,3);
-            if (array[firstChoice]) {
-                resultsNotChange.put(i, true);
-            } else {
-                resultsNotChange.put(i, false);
-            }
+            resultsNotChange.put(i, array[firstChoice]);
         }
         return resultsNotChange;
     }
